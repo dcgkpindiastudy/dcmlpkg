@@ -65,4 +65,29 @@ def DC_describe_categorical(X):
     """
     from IPython.display import display, HTML
     display(HTML(X[X.columns[X.dtypes == "object"]].describe().to_html()))
+
+
+def DC_numericalCategoricalSplit(df):
+    """
+    Split a DataFrame into numerical and categorical data.
+
+    Parameters:
+    df : pandas.DataFrame
+        The input DataFrame to be split.
+
+    Returns:
+    numerical_data : pandas.DataFrame
+        DataFrame containing only the numerical features.
+
+    categorical_data : pandas.DataFrame
+        DataFrame containing only the categorical features.
+
+    Example:
+    numerical_data, categorical_data = DC_numericalCategoricalSplit(my_dataframe)
+    """
+    numerical_features=df.select_dtypes(exclude=['object']).columns
+    categorical_features=df.select_dtypes(include=['object']).columns
+    numerical_data=df[numerical_features]
+    categorical_data=df[categorical_features]
+    return(numerical_data,categorical_data)
     
